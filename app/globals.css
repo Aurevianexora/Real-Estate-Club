@@ -1,0 +1,332 @@
+/*
+ * AURELIA — THE LIVING ARCHITECTURE
+ * Global cinematic design system · v1.1
+ * Compatible with the provided app/page.tsx, including its embedded styles.
+ * No camera, WebGL or data mutations happen in this CSS file.
+ *
+ * Design intent: editorial luxury, spatial clarity, disciplined motion,
+ * responsive layouts, accessible focus and reduced-motion safeguards.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+  --ink: #09100f;
+  --ink-deep: #060b0a;
+  --ink-elevated: #14211b;
+  --forest: #20362d;
+  --cream: #f1eee5;
+  --cream-soft: #d5d4c9;
+  --muted: #a4b0a8;
+  --muted-strong: #c2c8bd;
+  --gold: #c4a478;
+  --gold-bright: #e1c49b;
+  --gold-deep: #8e7552;
+  --stroke: rgba(230, 224, 208, 0.16);
+  --stroke-strong: rgba(226, 192, 145, 0.38);
+  --glass-dark: rgba(11, 21, 17, 0.78);
+  --nav-height: 92px;
+  --page-gutter: clamp(24px, 5.5vw, 100px);
+  --ease-cinematic: cubic-bezier(.22, 1, .36, 1);
+  --ease-soft: cubic-bezier(.16, 1, .3, 1);
+  --ease-snappy: cubic-bezier(.25, .8, .25, 1);
+  --duration-fast: 200ms;
+  --duration-medium: 480ms;
+  --duration-long: 880ms;
+  --shadow-deep: 0 28px 100px rgba(0, 0, 0, .45);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--ink); -webkit-text-size-adjust: 100%; }
+body { margin: 0; min-width: 320px; min-height: 100vh; overflow-x: clip; background: var(--ink); color: var(--cream); font-family: 'DM Sans', Arial, sans-serif; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--gold); color: var(--ink-deep); }
+button, input, textarea, select { font: inherit; }
+button { -webkit-tap-highlight-color: transparent; }
+button:not(:disabled), [role="button"] { touch-action: manipulation; }
+a { color: inherit; }
+img, video, canvas, svg { max-width: 100%; }
+img { display: block; }
+:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 4px; }
+button:disabled { cursor: not-allowed; }
+
+/* App surface, depth, graphics. Higher specificity intentionally supplements
+   the style JSX currently present in page.tsx without deleting it. */
+.aurelia-root { isolation: isolate; background: var(--ink); }
+.aurelia-root .story-height { height: 380svh; min-height: 2200px; }
+.aurelia-root .experience-stage { height: 100vh; height: 100dvh; min-height: 420px; background: radial-gradient(ellipse at 60% 45%, #1b302b 0%, #101c19 38%, #09100f 75%); }
+.aurelia-root .three-layer { contain: layout paint style; transition: opacity 800ms var(--ease-cinematic), filter 800ms var(--ease-cinematic); }
+.aurelia-root .three-layer canvas { display: block; width: 100%; height: 100%; outline: none; }
+.aurelia-root .three-layer-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.aurelia-root .scene-vignette { background: linear-gradient(90deg, rgba(5,12,10,.89) 0%,rgba(5,12,10,.53) 33%,rgba(5,12,10,.10) 67%,rgba(5,12,10,.28) 100%),linear-gradient(0deg,rgba(5,12,10,.80),transparent 31%,transparent 78%,rgba(5,12,10,.33)); }
+.aurelia-root .scene-grain { opacity: .13; mix-blend-mode: screen; }
+
+/* Editorial typography */
+.aurelia-root .wordmark,
+.aurelia-root .hero-text h1,
+.aurelia-root .mode-heading h2,
+.aurelia-root .panel-intro h2,
+.aurelia-root .residence-body h2,
+.aurelia-root .residence-id strong,
+.aurelia-root .level-selector strong,
+.aurelia-root .menu-overlay button { font-family: 'Playfair Display', Georgia, serif; }
+.aurelia-root .hero-text h1,
+.aurelia-root .mode-heading h2,
+.aurelia-root .panel-intro h2,
+.aurelia-root .residence-body h2 { font-weight: 400; text-wrap: balance; letter-spacing: -.055em; }
+.aurelia-root .hero-text h1 i,
+.aurelia-root .mode-heading h2 i,
+.aurelia-root .panel-intro h2 i,
+.aurelia-root .residence-body h2 i { font-weight: 400; }
+.aurelia-root .eyebrow { font-size: 10px; font-weight: 600; letter-spacing: .19em; text-transform: uppercase; color: var(--gold-bright); }
+.aurelia-root .eyebrow-line { flex: 0 0 34px; background: linear-gradient(90deg,var(--gold-bright),rgba(225,196,155,.2)); }
+
+/* Top navigation, wordmark and menu */
+.aurelia-root .top-nav { height: var(--nav-height); padding-inline: var(--page-gutter); border-bottom: 1px solid rgba(241,238,229,.13); background: linear-gradient(180deg,rgba(6,12,10,.42),transparent); }
+.aurelia-root .wordmark { position: relative; padding: 9px 0; font-size: clamp(22px,2vw,30px); transition: color var(--duration-fast) ease, transform var(--duration-medium) var(--ease-cinematic); }
+.aurelia-root .wordmark:hover { color: var(--gold-bright); transform: translateY(-1px); }
+.aurelia-root .gold-dot { text-shadow: 0 0 24px rgba(225,196,155,.42); }
+.aurelia-root .brand-center { letter-spacing: .24em; color: #c0c3b8; }
+.aurelia-root .nav-menu { min-height: 44px; padding: 12px 2px 12px 14px; transition: color var(--duration-fast) ease; }
+.aurelia-root .nav-menu:hover { color: var(--gold-bright); }
+.aurelia-root .nav-menu svg { transition: transform var(--duration-medium) var(--ease-cinematic); }
+.aurelia-root .nav-menu:hover svg { transform: rotate(90deg); }
+.aurelia-root .menu-overlay { z-index: 29; background: linear-gradient(145deg,rgba(30,45,36,.98),rgba(10,20,16,.99)); border-left:1px solid var(--stroke-strong); box-shadow: var(--shadow-deep); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); animation: aurelia-menu-in 560ms var(--ease-cinematic) both; }
+.aurelia-root .menu-overlay button { min-height: 66px; cursor: pointer; transition: color 200ms ease, padding-left 350ms var(--ease-cinematic), border-color 250ms ease; }
+.aurelia-root .menu-overlay button:hover { color: var(--gold-bright); padding-left: 9px; border-color: var(--gold-deep); }
+.aurelia-root .menu-overlay button svg { transition: transform 250ms var(--ease-cinematic); }
+.aurelia-root .menu-overlay button:hover svg { transform: translate(4px,-4px); }
+
+/* Opening story */
+.aurelia-root .hero-text { top: 29%; width: min(880px,77vw); transform: translateZ(0); }
+.aurelia-root .hero-text h1 { font-size: clamp(56px,7.2vw,142px); line-height: .98; margin-block: 23px 28px; color: #f3eee5; text-shadow: 0 12px 45px rgba(0,0,0,.11); }
+.aurelia-root .hero-text > p { max-width: 340px; color: var(--muted-strong); font-size: clamp(12px, .9vw, 14px); line-height: 1.95; }
+.aurelia-root .hero-text .eyebrow { max-width: 580px; }
+.aurelia-root .scene-count { bottom: 70px; }
+.aurelia-root .scene-count > div { background: linear-gradient(90deg, var(--gold),rgba(196,164,120,.22)); }
+.aurelia-root .scroll-cue { bottom: 64px; color: var(--cream-soft); }
+.aurelia-root .scroll-cue svg { animation: aurelia-scroll-nudge 2.5s ease-in-out infinite; }
+.aurelia-root .progress-rail { right: 22px; width: 2px; border-radius: 3px; overflow: hidden; background: rgba(219,210,190,.2); }
+.aurelia-root .progress-rail > div { background: linear-gradient(180deg,#e5cead,#a78154); box-shadow: 0 0 16px rgba(225,196,155,.3); transition: height 100ms linear; }
+
+/* Premium buttons */
+.aurelia-root .floating-explore,
+.aurelia-root .gold-button,
+.aurelia-root .secondary-action,
+.aurelia-root .room-selector button,
+.aurelia-root .level-selector button { cursor: pointer; position: relative; overflow: hidden; transition: color 260ms ease, background 350ms var(--ease-cinematic), border-color 260ms ease, transform 350ms var(--ease-cinematic), box-shadow 350ms ease; }
+.aurelia-root .floating-explore,
+.aurelia-root .gold-button { min-height: 50px; border-color: rgba(224,191,143,.85); background: rgba(24,36,27,.76); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 14px 45px rgba(0,0,0,.15); }
+.aurelia-root .floating-explore:hover,
+.aurelia-root .gold-button:hover { background: #d8b88c; border-color: #d8b88c; color: #101712; box-shadow: 0 16px 48px rgba(0,0,0,.24); transform: translateY(-3px); }
+.aurelia-root .floating-explore svg,
+.aurelia-root .gold-button svg,
+.aurelia-root .secondary-action svg { transition: transform 300ms var(--ease-cinematic); }
+.aurelia-root .floating-explore:hover svg,
+.aurelia-root .gold-button:hover svg { transform: translate(3px,-3px); }
+.aurelia-root .secondary-action { min-height: 44px; border-color: rgba(224,196,157,.42); background: rgba(10,22,17,.70); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.aurelia-root .secondary-action:hover { background: rgba(53,67,52,.9); border-color: var(--gold); }
+.aurelia-root .secondary-action:hover svg { transform: translateX(-3px); }
+
+/* Tower exploration and quick floor selection */
+.aurelia-root .mode-heading { top: 19%; left: var(--page-gutter); max-width: 520px; }
+.aurelia-root .mode-heading h2 { line-height: 1.06; font-size: clamp(45px,5vw,83px); }
+.aurelia-root .mode-heading > p:last-child { max-width: 320px; }
+.aurelia-root .tower-side-note { letter-spacing: .13em; color: var(--gold-bright); }
+.aurelia-root .floor-quicknav { padding: 18px; background: rgba(8,19,15,.50); border: 1px solid rgba(226,192,145,.16); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-radius: 2px; box-shadow: 0 24px 60px rgba(0,0,0,.18); }
+.aurelia-root .floor-number-grid { gap: 7px; }
+.aurelia-root .floor-number-grid button { min-height: 39px; border-radius: 1px; font-variant-numeric: tabular-nums; border-color: rgba(224,220,208,.18); background: rgba(34,51,43,.78); transition: background var(--duration-fast) ease, border-color var(--duration-fast) ease, transform var(--duration-fast) ease, color var(--duration-fast) ease; }
+.aurelia-root .floor-number-grid button:hover { transform: translateY(-2px); background: var(--gold-bright); border-color: var(--gold-bright); color: var(--ink-deep); }
+.aurelia-root .floor-number-grid button:active { transform: scale(.96); }
+.aurelia-root .level-tooltip { border: 1px solid #ead0a7; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+
+/* Floor screen: high-contrast layer and card details */
+.aurelia-root .panel-overlay { animation: aurelia-overlay-in 600ms var(--ease-cinematic) both; background: linear-gradient(90deg,rgba(5,12,10,.97) 0%,rgba(7,15,12,.88) 43%,rgba(7,15,12,.66) 100%); }
+.aurelia-root .panel-intro h2 { color: var(--cream); }
+.aurelia-root .panel-intro > p:not(.eyebrow) { color: var(--muted-strong); }
+.aurelia-root .level-selector { gap: 20px; }
+.aurelia-root .level-selector button { border-color: rgba(221,192,148,.35); background: rgba(31,47,36,.72); }
+.aurelia-root .level-selector button:hover:not(:disabled) { background: var(--gold); color: var(--ink); transform: translateY(-2px); }
+.aurelia-root .level-selector strong { font-variant-numeric: lining-nums tabular-nums; }
+.aurelia-root .residence-list { max-height: min(62vh,650px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #886f50 transparent; }
+.aurelia-root .residence-item { grid-template-columns: minmax(0,1fr) auto; column-gap: 16px; row-gap: 8px; padding: 22px 14px; border-bottom-color: rgba(216,197,165,.20); transition: background var(--duration-medium) var(--ease-cinematic), padding-left var(--duration-medium) var(--ease-cinematic), border-color 250ms ease; }
+.aurelia-root .residence-item:hover { background: rgba(255,255,255,.055); padding-left: 22px; border-color: rgba(225,196,155,.55); }
+.aurelia-root .residence-item > svg { color: var(--gold-bright); transition: transform 270ms var(--ease-cinematic); }
+.aurelia-root .residence-item:hover > svg { transform: translate(3px,-3px); }
+.aurelia-root .residence-id strong { font-size: clamp(29px,2.3vw,42px); line-height: 1.2; }
+.aurelia-root .residence-meta { color: #c4c7bd; line-height: 1.7; }
+.aurelia-root .status-pill { border-radius: 2px; font-weight: 700; letter-spacing: .12em; }
+.aurelia-root .status-available { color: #e5e7cf; border-color: rgba(192,206,164,.66); background: rgba(93,116,78,.12); }
+.aurelia-root .status-reserved { color: #f0d4ae; border-color: rgba(224,177,113,.52); background: rgba(130,95,50,.1); }
+.aurelia-root .status-sold,
+.aurelia-root .status-rented { color: #aeb5b0; border-color: rgba(169,172,166,.32); opacity: .78; }
+
+/* Unit and room immersive presentation. This is concept photography, not 3D walk mode. */
+.aurelia-root .residence-view { isolation: isolate; animation: aurelia-overlay-in 650ms var(--ease-cinematic) both; }
+.aurelia-root .interior-image { background-color: #17231f; background-size: cover; background-position: center; transform: scale(1.01); animation: aurelia-interior-arrive 1100ms var(--ease-cinematic) both; }
+.aurelia-root .interior-shade { background: linear-gradient(90deg,rgba(5,12,10,.96) 0%,rgba(5,12,10,.82) 30%,rgba(5,12,10,.30) 65%,rgba(5,12,10,.22) 100%),linear-gradient(0deg,rgba(5,12,10,.79) 0%,transparent 46%,rgba(5,12,10,.19) 100%); }
+.aurelia-root .residence-topline { gap: 16px; }
+.aurelia-root .residence-body { max-height: calc(100dvh - 195px); overflow-y: auto; overscroll-behavior: contain; padding: 6px 14px 20px 0; scrollbar-width: thin; scrollbar-color: #8c7657 transparent; }
+.aurelia-root .residence-body h2 { font-size: clamp(50px,6.2vw,100px); margin-block: 16px 17px; }
+.aurelia-root .residence-body > p:not(.eyebrow) { max-width: 460px; }
+.aurelia-root .unit-stat-row { gap: clamp(17px,2.2vw,34px); }
+.aurelia-root .unit-stat { min-width: 79px; gap: 7px; }
+.aurelia-root .unit-stat svg { color: var(--gold-bright); }
+.aurelia-root .unit-stat strong { font-size: 20px; font-variant-numeric: tabular-nums; }
+.aurelia-root .unit-stat span { color: var(--muted-strong); }
+.aurelia-root .unit-price { border-top: 1px solid rgba(222,208,180,.17); padding-top: 22px; }
+.aurelia-root .unit-price strong { font-family: 'DM Sans',sans-serif; font-weight: 600; font-variant-numeric: tabular-nums; }
+.aurelia-root .room-selector { max-width: 610px; }
+.aurelia-root .room-selector > div { gap: 9px; }
+.aurelia-root .room-selector button { min-height: 42px; border-color: rgba(241,238,229,.36); border-radius: 2px; background: rgba(14,29,23,.77); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.aurelia-root .room-selector button:hover { background: rgba(89,108,87,.65); border-color: var(--gold-bright); transform: translateY(-2px); }
+.aurelia-root .room-selector button.room-active { background: #d5b78b; color: #111a15; border-color: #d5b78b; }
+.aurelia-root .room-selector button.room-active:hover { background: #e6caa1; }
+.aurelia-root .image-disclaimer { color: rgba(246,239,225,.9); text-shadow: 0 1px 9px rgba(0,0,0,.55); }
+
+/* Global bar */
+.aurelia-root .bottom-bar { height: 39px; padding-inline: var(--page-gutter); border-top: 1px solid rgba(223,220,209,.12); background: rgba(7,14,11,.67); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.aurelia-root .bottom-location { min-width: 0; }
+.aurelia-root .bottom-location svg { flex-shrink: 0; color: var(--gold); }
+.aurelia-root .canvas-fallback { padding: 20px; text-align: center; color: #e8decf; background: radial-gradient(circle at center, #20362c, #08110d); }
+
+/* Cinematic micro-motion */
+@keyframes aurelia-menu-in {
+  from { opacity: 0; transform: translate3d(18px,-7px,0); }
+  to { opacity: 1; transform: translate3d(0,0,0); }
+}
+@keyframes aurelia-overlay-in {
+  from { opacity: 0; transform: translate3d(0,14px,0); }
+  to { opacity: 1; transform: translate3d(0,0,0); }
+}
+@keyframes aurelia-interior-arrive {
+  from { opacity: .72; transform: scale(1.055); filter: saturate(.72); }
+  to { opacity: 1; transform: scale(1.01); filter: saturate(1); }
+}
+@keyframes aurelia-scroll-nudge {
+  0%,100% { transform: translateY(0); opacity: .6; }
+  55% { transform: translateY(7px); opacity: 1; }
+}
+
+/* Large-display refinements */
+@media (min-width: 1500px) {
+  .aurelia-root .hero-text { top: 30%; }
+  .aurelia-root .hero-text h1 { font-size: clamp(96px,7vw,155px); }
+  .aurelia-root .floor-quicknav { width: 232px; }
+}
+
+/* Laptops and compact desktop */
+@media (max-width: 1100px) {
+  .aurelia-root .hero-text { left: 6vw; width: 80vw; }
+  .aurelia-root .mode-heading { left: 6vw; }
+  .aurelia-root .floor-quicknav { right: 5vw; }
+  .aurelia-root .residence-body { left: 5vw; }
+  .aurelia-root .panel-overlay { gap: 24px; }
+}
+
+/* Tablets / phones */
+@media (max-width: 900px) {
+  :root { --nav-height: 76px; --page-gutter: 24px; }
+  .aurelia-root .brand-center, .aurelia-root .scroll-cue, .aurelia-root .tower-side-note { display: none; }
+  .aurelia-root .top-nav { height: var(--nav-height); }
+  .aurelia-root .menu-overlay { top: var(--nav-height); width: min(100%, 480px); padding: 35px 25px; }
+  .aurelia-root .hero-text { left: 7%; top: 27%; width: 88%; }
+  .aurelia-root .hero-text h1 { font-size: clamp(44px,9vw,82px); }
+  .aurelia-root .floating-explore { bottom: 79px; right: 24px; }
+  .aurelia-root .mode-heading { left: 24px; top: 15%; max-width: min(420px, calc(100% - 48px)); }
+  .aurelia-root .mode-heading h2 { font-size: clamp(43px,6.4vw,70px); }
+  .aurelia-root .floor-quicknav { top: auto; bottom: 83px; right: 24px; left: 24px; width: auto; max-width: none; padding: 12px; }
+  .aurelia-root .floor-number-grid { grid-template-columns: repeat(6,minmax(0,1fr)); gap: 5px; margin-top: 12px; }
+  .aurelia-root .floor-number-grid button { min-height: 37px; font-size: 11px; padding: 7px 2px; }
+  .aurelia-root .panel-overlay { grid-template-columns: minmax(0,1fr); grid-template-rows: auto minmax(0,1fr); gap: 15px; padding: 95px 24px 64px; overflow-y: auto; }
+  .aurelia-root .panel-intro h2 { font-size: clamp(39px,6vw,50px); margin: 15px 0; }
+  .aurelia-root .panel-intro .eyebrow { margin-top: 17px; }
+  .aurelia-root .level-selector { margin-top: 12px; }
+  .aurelia-root .level-selector strong { font-size: 40px; }
+  .aurelia-root .residence-list { max-height: none; overflow: visible; }
+  .aurelia-root .residence-item { padding: 15px 8px; }
+  .aurelia-root .residence-id strong { font-size: 30px; }
+  .aurelia-root .residence-topline { top: 92px; left: 24px; right: 24px; }
+  .aurelia-root .residence-body { left: 24px; top: 23%; width: calc(100% - 48px); max-height: calc(100dvh - 29%); }
+  .aurelia-root .residence_body h2 { font-size: clamp(43px,8.4vw,76px); }
+  .aurelia-root .image-disclaimer { left: 24px; right: 24px; bottom: 52px; }
+  .aurelia-root .bottom-bar { height: 38px; }
+  .aurelia-root .bottom-bar > span { display: none; }
+}
+
+@media (max-width: 560px) {
+  :root { --page-gutter: 20px; }
+  .aurelia-root .top-nav { padding-inline: 20px; }
+  .aurelia-root .wordmark { font-size: 24px; }
+  .aurelia-root .nav-menu { gap: 6px; }
+  .aurelia-root .hero-text { top: 25%; left: 22px; width: calc(100% - 44px); }
+  .aurelia-root .hero-text h1 { font-size: clamp(39px,11vw,67px); letter-spacing: -.06em; }
+  .aurelia-root .hero-text > p { max-width: 275px; font-size: 12px; }
+  .aurelia-root .eyebrow { font-size: 9px; letter-spacing: .12em; }
+  .aurelia-root .eyebrow-line { flex-basis: 23px; }
+  .aurelia-root .scene-count { left: 22px; bottom: 65px; }
+  .aurelia-root .scene-count > div { width: 42px; }
+  .aurelia-root .floating-explore { right: 22px; bottom: 79px; padding: 12px 13px; font-size: 9px; min-height: 43px; }
+  .aurelia-root .progress-rail { right: 10px; }
+  .aurelia-root .mode-heading { top: 15%; left: 22px; }
+  .aurelia-root .mode-heading h2 { font-size: clamp(37px,10vw,57px); }
+  .aurelia-root .floor-quicknav { bottom: 76px; left: 16px; right: 16px; }
+  .aurelia-root .floor-number-grid button { min-height: 36px; }
+  .aurelia-root .tower-back { left: 22px; bottom: 56px; }
+  .aurelia-root .panel-overlay { padding: 90px 19px 52px; }
+  .aurelia-root .panel-intro h2 { font-size: clamp(35px,9vw,47px); }
+  .aurelia-root .level-selector button { width: 39px; height: 39px; }
+  .aurelia-root .residence-item { grid-template-columns: minmax(0,1fr) auto; column-gap: 6px; }
+  .aurelia-root .residence-id strong { font-size: 27px; }
+  .aurelia-root .residence-meta { font-size: 10px; }
+  .aurelia-root .residence-topline { top: 88px; left: 20px; right: 20px; }
+  .aurelia-root .residence-body { left: 20px; top: 21%; width: calc(100% - 40px); max-height: calc(100dvh - 30%); }
+  .aurelia-root .residence_body h2 { font-size: clamp(39px,10.2vw,60px); }
+  .aurelia-root .unit-stat-row { gap: 17px; margin-top: 19px; }
+  .aurelia-root .unit-stat { min-width: 65px; }
+  .aurelia-root .unit-stat strong { font-size: 17px; }
+  .aurelia-root .unit-price { gap: 9px; margin-block: 15px; }
+  .aurelia-root .unit-price strong { font-size: 18px; }
+  .aurelia-root .room-selector button { padding: 9px; min-height: 38px; font-size: 10px; }
+  .aurelia-root .image-disclaimer { bottom: 45px; left: 20px; right: 20px; font-size: 8px; }
+  .aurelia-root .bottom-bar { padding-inline: 20px; }
+}
+
+/* Short screens, laptop windows and landscape mobile */
+@media (max-height: 740px) and (min-width: 901px) {
+  .aurelia-root .hero-text { top: 26%; }
+  .aurelia-root .mode-heading { top: 15%; }
+  .aurelia-root .panel-intro h2 { font-size: clamp(39px,4.5vw,64px); margin-block: 18px; }
+  .aurelia-root .residence-body { top: 19%; max-height: calc(100dvh - 135px); }
+  .aurelia-root .residence_body h2 { font-size: clamp(43px,5.1vw,71px); }
+  .aurelia-root .unit-stat-row { margin-top: 19px; }
+  .aurelia-root .unit-price { margin-block: 16px; }
+}
+@media (max-height: 580px) and (max-width: 900px) {
+  .aurelia-root .experience-stage { min-height: 0; }
+  .aurelia-root .hero-text { top: 20%; }
+  .aurelia-root .hero-text h1 { font-size: clamp(32px,7vw,58px); margin-block: 10px; }
+  .aurelia-root .mode-heading { top: 16%; }
+  .aurelia-root .mode-heading h2 { font-size: clamp(31px,6vw,48px); }
+  .aurelia-root .floor-quicknav { bottom: 55px; }
+  .aurelia-root .floor-number-grid { grid-template-columns: repeat(9,1fr); }
+  .aurelia-root .residence-body { top: 21%; max-height: 65dvh; }
+}
+
+/* Reduced motion, keyboard users and non-hover devices */
+@media (hover: none) {
+  .aurelia-root .menu-overlay button:hover,
+  .aurelia-root .residence-item:hover { padding-left: revert-layer; }
+  .aurelia-root .floor-number-grid button:hover,
+  .aurelia-root .floating-explore:hover,
+  .aurelia-root .gold-button:hover,
+  .aurelia-root .room-selector button:hover { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within { scroll-behavior: auto; }
+  *,*::before,*::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  .aurelia-root .three-layer,
+  .aurelia-root .residence-view,
+  .aurelia-root .interior-image { filter: none !important; transform: none !important; }
+}
